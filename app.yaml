@@ -19,9 +19,11 @@ handlers:
 
 - url: /
   script: app.app
+  secure: always
 
 - url: /.*
   login: required
+  secure: always
   script: app.app
 
 libraries:
