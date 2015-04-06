@@ -1,0 +1,1 @@
+$GAE_HOME/appcfg.py --oauth2 update .
