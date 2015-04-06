@@ -17,7 +17,11 @@ handlers:
 - url: /tasks/.*
   script: tasks.app
 
+- url: /
+  script: app.app
+
 - url: /.*
+  login: required
   script: app.app
 
 libraries:

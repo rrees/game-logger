@@ -18,6 +18,16 @@ class MainPage(webapp2.RequestHandler):
 		template = JINJA.get_template('index.html')
 		self.response.write(template.render(template_values))
 
+class HomePage(webapp2.RequestHandler):
+	def get(self):
+		template_values = {
+			
+		}
+
+		template = JINJA.get_template('home.html')
+		self.response.write(template.render(template_values))
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
+	webapp2.Route(r'/home', handler=HomePage),
 	], debug=True)
