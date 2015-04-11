@@ -4,7 +4,9 @@ import datetime
 
 import webapp2
 import jinja2
+import games
 
+from google.appengine.api import users
 
 JINJA = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
@@ -32,6 +34,9 @@ class HomePage(webapp2.RequestHandler):
 class LogPlay(webapp2.RequestHandler):
 	def post(self):
 		logging.info(self.request.POST)
+		user = users.get_current_user()
+
+		games.log(user, self.request.POST['game_name'], self.request.POST['date_played'])
 		return webapp2.redirect('/home')
 
 app = webapp2.WSGIApplication([
