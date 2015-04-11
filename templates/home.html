@@ -4,9 +4,22 @@
 
 {% block body %}
 <div class="container-fluid">
+<header>
 <h1>Your log</h1>
+</header>
 
 {% include 'forms/log.html' %}
+</div>
+
+<div class="container-fluid">
+{% for log in games_logged %}
+<section>
+	<header>
+		<h1>{{log.game_name}}<h1>
+	</header>
+	<p>{{log.date_played}}</p>
+</section>
+{% endfor %}
 </div>
 
 {% endblock %}

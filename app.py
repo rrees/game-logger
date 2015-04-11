@@ -24,8 +24,11 @@ class MainPage(webapp2.RequestHandler):
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
+		user = users.get_current_user()
+
 		template_values = {
 			"today": datetime.date.today().isoformat(),
+			"games_logged": games.all_played(user),
 		}
 
 		template = JINJA.get_template('home.html')
