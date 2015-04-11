@@ -27,7 +27,12 @@ class HomePage(webapp2.RequestHandler):
 		template = JINJA.get_template('home.html')
 		self.response.write(template.render(template_values))
 
+class LogPlay(webapp2.RequestHandler):
+	def post(self):
+		return webapp2.redirect('/home')
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/home', handler=HomePage),
+	webapp2.Route(r'/log', handler=LogPlay)
 	], debug=True)

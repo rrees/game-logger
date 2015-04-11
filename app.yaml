@@ -9,6 +9,8 @@ handlers:
   static_dir: static
 
 - url: /api/.*
+  login: required
+  secure: always
   script: api.app
 
 - url: /jobs/.*
