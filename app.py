@@ -1,4 +1,6 @@
 import os
+import logging
+import datetime
 
 import webapp2
 import jinja2
@@ -21,7 +23,7 @@ class MainPage(webapp2.RequestHandler):
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		template_values = {
-			
+			"today": datetime.date.today().isoformat(),
 		}
 
 		template = JINJA.get_template('home.html')
@@ -29,6 +31,7 @@ class HomePage(webapp2.RequestHandler):
 
 class LogPlay(webapp2.RequestHandler):
 	def post(self):
+		logging.info(self.request.POST)
 		return webapp2.redirect('/home')
 
 app = webapp2.WSGIApplication([
