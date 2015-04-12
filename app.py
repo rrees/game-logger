@@ -36,10 +36,12 @@ class HomePage(webapp2.RequestHandler):
 
 class LogPlay(webapp2.RequestHandler):
 	def post(self):
-		logging.info(self.request.POST)
+		#logging.info(self.request.POST)
 		user = users.get_current_user()
 
-		games.log(user, self.request.POST['game_name'], self.request.POST['date_played'])
+		date_played = datetime.datetime.strptime(self.request.POST['date_played'], '%Y-%m-%d').date()
+
+		games.log(user, self.request.POST['game_name'], date_played)
 		return webapp2.redirect('/home')
 
 app = webapp2.WSGIApplication([
