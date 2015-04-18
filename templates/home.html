@@ -17,6 +17,8 @@
 	<header>
 		<h1>{{log.game_name}}<h1>
 	</header>
+	<p>{{log.notes}}</p>
+	<p>{{log.tags|join(", ")}}</p>
 	<p>{{log.date_played}}</p>
 </section>
 {% endfor %}

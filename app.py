@@ -41,7 +41,11 @@ class LogPlay(webapp2.RequestHandler):
 
 		date_played = datetime.datetime.strptime(self.request.POST['date_played'], '%Y-%m-%d').date()
 
-		games.log(user, self.request.POST['game_name'], date_played)
+		tags = self.request.POST.get('tags', '').split(',')
+
+		notes = self.request.POST.get('notes', None)
+
+		games.log(user, self.request.POST['game_name'], date_played, tags=tags, notes=notes)
 		return webapp2.redirect('/home')
 
 app = webapp2.WSGIApplication([
