@@ -11,5 +11,15 @@
 	<input type="date" name="date_played" id="date-played" class="form-control" required {% if today %}value="{{today}}"{% endif %}/>
 </div>
 
+<div class="form-group">
+	<label for="tags">Tags</label>
+	<input type="text" name="tags" id="tags" class="form-control" />
+</div>
+
+<div class="form-group">
+	<label for="notes">Notes</label>
+	<textarea id="notes"name="notes" class="form-control" rows="3"></textarea>
+</div>
+
 <button type="submit" class="btn btn-default">Log</button>
 </form>
