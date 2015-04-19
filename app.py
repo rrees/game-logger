@@ -48,8 +48,21 @@ class LogPlay(webapp2.RequestHandler):
 		games.log(user, self.request.POST['game_name'], date_played, tags=tags, notes=notes)
 		return webapp2.redirect('/home')
 
+class LogPage(webapp2.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+
+		template_values = {
+			"games_logged": games.all_played(user),
+		}
+
+		template = JINJA.get_template('logs.html')
+		self.response.write(template.render(template_values))
+
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/home', handler=HomePage),
-	webapp2.Route(r'/log', handler=LogPlay)
+	webapp2.Route(r'/log', handler=LogPlay),
+	webapp2.Route(r'/logs', handler=LogPage),
 	], debug=True)

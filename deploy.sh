@@ -1,1 +1,1 @@
-$GAE_HOME/appcfg.py --oauth2 update .
+$GAE_HOME/appcfg.py --no_cookie update .

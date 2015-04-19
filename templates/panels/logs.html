@@ -1,0 +1,17 @@
+
+<div class="container-fluid">
+{% for log in games_logged %}
+<section>
+	<header>
+		<h1>{{log.game_name}}<h1>
+	</header>
+	{% if log.notes %}
+	<p>{{log.notes}}</p>
+	{% endif %}
+	{% if log.tags %}
+	<p>{{log.tags|join(", ")}}</p>
+	{% endif %}
+	<p>{{log.date_played}}</p>
+</section>
+{% endfor %}
+</div>
