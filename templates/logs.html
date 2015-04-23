@@ -10,6 +10,35 @@
 </div>
 
 <div class="container-fluid">
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for log in games_logged %}
+		<tr>
+			<td>{{log.game_name}}</td>
+			<td>{{log.date_played}}</td>
+			<td>
+				{% if log.notes %}
+				<div>
+				{{log.notes}}
+				</div>
+				{% endif %}
+
+				{% if log.tags %}
+				<p>Tags: {{log.tags|join(", ")}}</p>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
 </div>
 
 {% include 'panels/logs.html' %}
