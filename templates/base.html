@@ -13,17 +13,7 @@
 
 	<body>
 	{% block navigation %}
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/home">Logger</a>
-			</div>
-
-			<ul class="nav navbar-nav">
-				<li><a href="/logs">Played</a></li>
-			</ul>
-		</div>
-	</nav>
+	{% include 'panels/navigation.html' %}
 	{% endblock %}
 
 	{% block body %}
