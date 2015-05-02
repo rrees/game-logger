@@ -9,3 +9,9 @@ class LogEntry(ndb.Model):
 	date_played = ndb.DateProperty(required=True, auto_now_add=True)
 	tags = ndb.StringProperty(repeated=True)
 	notes= ndb.TextProperty()
+
+class Game(ndb.Model):
+	name = ndb.StringProperty(required=True)
+	description = ndb.TextProperty()
+	authors = ndb.StringProperty(repeated=True)
+	tags = ndb.StringProperty(repeated=True)
