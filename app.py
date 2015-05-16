@@ -43,6 +43,8 @@ class LogPlay(webapp2.RequestHandler):
 
 		tags = self.request.POST.get('tags', '').split(',')
 
+		tags = filter(lambda tag: len(tag) > 0, tags)
+
 		notes = self.request.POST.get('notes', None)
 
 		games.log(user, self.request.POST['game_name'], date_played, tags=tags, notes=notes)
