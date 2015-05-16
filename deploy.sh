@@ -1,1 +1,1 @@
-$GAE_HOME/appcfg.py --no_cookie update .
+$GAE_SDK/appcfg.py --no_cookie update .
