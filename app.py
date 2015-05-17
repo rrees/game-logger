@@ -15,6 +15,11 @@ JINJA = jinja2.Environment(
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
+		user = users.get_current_user()
+
+		if user:
+			return webapp2.redirect('/home')
+		
 		template_values = {
 			
 		}
