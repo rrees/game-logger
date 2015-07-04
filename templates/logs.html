@@ -22,7 +22,7 @@
 	<tbody>
 		{% for log in games_logged %}
 		<tr>
-			<td>{{log.game_name}}</td>
+			<td>{{log.game_name}} <sup><a href="/log/{{log.key.urlsafe()}}">Edit</a></sup></td>
 			<td>{{log.date_played}}</td>
 			<td>
 				{% if log.notes %}

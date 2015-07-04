@@ -79,7 +79,7 @@ class LogPage(webapp2.RequestHandler):
 		user = users.get_current_user()
 
 		template_values = {
-			"log": games.log(user, log_id),
+			"log": games.read_log(user, log_id),
 		}
 
 		template = JINJA.get_template('log.html')
@@ -90,5 +90,5 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/home', handler=HomePage),
 	webapp2.Route(r'/log', handler=LogPlay),
 	webapp2.Route(r'/logs', handler=LogsPage),
-	webapp2.Route(r'/log/<:log_id>', handler=LogPage)
+	webapp2.Route(r'/log/<log_id>', handler=LogPage)
 	], debug=True)
