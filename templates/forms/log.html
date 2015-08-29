@@ -3,7 +3,8 @@
 
 <div class="form-group">
 	<label for="game-name">Game name</label>
-	<input type="text" name="game_name" id="game-name" class="form-control" required />
+	<input type="text" name="game_name" id="game-name" class="form-control" required
+		{% if log and log.game_name %}value={{log.game_name}}/>
 </div>
 
 <div class="form-group">
