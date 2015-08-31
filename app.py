@@ -86,8 +86,19 @@ class LogPage(webapp2.RequestHandler):
 		self.response.write(template.render(template_values))
 
 	def post(self, log_id):
+		user = users.get_current_user()
 
-		webapp2.redirect('/log/'+log_id)
+		date_played = datetime.datetime.strptime(self.request.POST['date_played'], '%Y-%m-%d').date()
+
+		tags = self.request.POST.get('tags', '').split(',')
+
+		tags = filter(lambda tag: len(tag) > 0, tags)
+
+		notes = self.request.POST.get('notes', None)
+
+		games.log(user, self.request.POST['game_name'], date_played, tags=tags, notes=notes, log_id=log_id)
+
+		return webapp2.redirect('/log/'+log_id)
 
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),

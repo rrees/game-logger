@@ -1,6 +1,5 @@
 
-<form method="POST" action="/log">
-
+<form method="POST" action="/log{% if log %}/{{log.key.urlsafe()}}{% endif %}">
 <div class="form-group">
 	<label for="game-name">Game name</label>
 	<input type="text" name="game_name" id="game-name" class="form-control" required
@@ -22,7 +21,7 @@
 
 <div class="form-group">
 	<label for="notes">Notes</label>
-	<textarea id="notes"name="notes" class="form-control" rows="3">{% if log and log.notes %}value="{{log.notes}}"{% endif %}</textarea>
+	<textarea id="notes"name="notes" class="form-control" rows="3">{% if log and log.notes %}{{log.notes}}{% endif %}</textarea>
 </div>
 
 <button type="submit" class="btn btn-default">Log</button>
