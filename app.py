@@ -85,6 +85,10 @@ class LogPage(webapp2.RequestHandler):
 		template = JINJA.get_template('log.html')
 		self.response.write(template.render(template_values))
 
+	def post(self, log_id):
+
+		webapp2.redirect('/log/'+log_id)
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/home', handler=HomePage),
