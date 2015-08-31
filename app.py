@@ -100,10 +100,16 @@ class LogPage(webapp2.RequestHandler):
 
 		return webapp2.redirect('/log/'+log_id)
 
+class DeleteLogPage(webapp2.RequestHandler):
+	def post(self, log_id):
+		games.delete_log(log_id)
+		return webapp2.redirect('/logs')
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/home', handler=HomePage),
 	webapp2.Route(r'/log', handler=LogPlay),
 	webapp2.Route(r'/logs', handler=LogsPage),
-	webapp2.Route(r'/log/<log_id>', handler=LogPage)
+	webapp2.Route(r'/log/<log_id>', handler=LogPage),
+	webapp2.Route(r'/log/<log_id>/delete', handler=DeleteLogPage),
 	], debug=True)

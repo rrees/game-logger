@@ -49,5 +49,5 @@ def log(user, game_name, date_played, tags=None, notes=None, log_id=None):
 def all_played(user):
 	return models.LogEntry.query(models.LogEntry.user == user).order(-models.LogEntry.date_played)
 
-def read_log(user, log_id):
-	return ndb.Key(urlsafe=log_id).get()
+def delete_log(log_id):
+	return ndb.Key(urlsafe=log_id).delete()
