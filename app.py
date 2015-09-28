@@ -4,6 +4,8 @@ import datetime
 
 import webapp2
 import jinja2
+
+import queries
 import games
 
 from google.appengine.api import users
@@ -33,7 +35,7 @@ class HomePage(webapp2.RequestHandler):
 
 		template_values = {
 			"today": datetime.date.today().isoformat(),
-			"games_logged": games.all_played(user),
+			"games_logged": queries.period.last_thirty_days(user),
 		}
 
 		template = JINJA.get_template('home.html')
