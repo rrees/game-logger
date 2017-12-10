@@ -1,6 +1,24 @@
+{% extends 'default.html' %}
+
+{% block nav_items %}
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-    <p><em>Hello</em> <strong>world</strong></p>
+
+    <form action="/forms/login" method="POST">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Sign-in</button>
+        </div>
+    </form>
+
 </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
