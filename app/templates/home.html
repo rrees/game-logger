@@ -1,7 +1,19 @@
+{% extends 'default.html' %}
 
 {% block content %}
 <div class="container-fluid">
     <p><em>Home</em> <strong>page</strong></p>
+</div>
+
+<div class="container-fluid">
+    <form method="POST" action="/log">
+        {% include 'forms/log.html' %}
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Log</button>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
