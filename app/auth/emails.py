@@ -6,6 +6,8 @@ import requests
 from app import app
 from . import config
 
+APP_NAME = config.config['application_name']
+
 def send_login(email, login_token):
 
     mailgun_api_key = os.environ.get('MAILGUN_API_KEY')
@@ -23,7 +25,7 @@ def send_login(email, login_token):
     payload = {
         'from': 'Login <login@mg.passwordless.ninja>',
         'to': email,
-        'subject': 'Game Logger Login',
+        'subject': f'{APP_NAME} Login',
         'text': f'{login_prefix}/login/{login_token}'
     }
 
