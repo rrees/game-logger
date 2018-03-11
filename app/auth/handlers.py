@@ -56,7 +56,7 @@ def confirmation(login_token):
 
     if not "email" in login_data:
         app.logger.warning("Email not found in login request")
-        return flask.redirect('/login')
+        return flask.redirect('/')
     
     # Turn token into session
     session_id = uuid.uuid4()
