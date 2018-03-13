@@ -3,3 +3,4 @@ gunicorn
 psycopg2
 requests
 redis
+flask_sslify

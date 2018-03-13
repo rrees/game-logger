@@ -2,6 +2,7 @@ import os
 import logging
 
 import flask
+import flask_sslify
 
 from . import handlers
 from . import redis_utils
@@ -16,6 +17,9 @@ redis = redis_utils.setup_redis(redis_url) if redis_url else None
 
 app = flask.Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
+
+if not ENV == "DEV":
+    sslify = flask_sslify.SSLify(app)
 
 logger = app.logger
 
