@@ -7,5 +7,6 @@ config = {
         "PROD": {
             "login_prefix": "https://heroku-game-logger.herokuapp.com"
         }
-    }
+    },
+    "app_name": "game-logger",
 }

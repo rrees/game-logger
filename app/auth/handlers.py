@@ -10,22 +10,13 @@ from app import app
 from app.config import config
 
 from . import emails
-
-def login_key(login_token):
-    return "dungeon-arena:login:" + str(login_token)
-
-def session_key(session_id):
-    return f"dungeon-arena:session:{session_id}"
-
-def user_key(email):
-    email_hash = hashlib.md5(email).hexdigest()
-    return f"dungeon-arena:user:{email_hash}"
+from app.keys import login_key, session_key, user_key
 
 def login_form():
     email = flask.request.form.get("email")
-    app.logger.info(email)
+    #app.logger.info(email)
 
-    app.logger.info(app.redis)
+    #app.logger.info(app.redis)
 
     # Generate login token
     login_token = uuid.uuid4()
