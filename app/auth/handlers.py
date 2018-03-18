@@ -16,7 +16,7 @@ def login_form():
     email = flask.request.form.get("email")
     #app.logger.info(email)
 
-    if email not in config.allowed_emails:
+    if email not in config.get('allowed_emails', []):
         return flask.redirect(flask.url_for('login_problem'))
 
     #app.logger.info(app.redis)

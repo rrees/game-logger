@@ -12,4 +12,5 @@ config = {
         }
     },
     "app_name": "game-logger",
+    "allowed_emails": allowed_emails,
 }
