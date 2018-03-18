@@ -7,7 +7,7 @@ import flask
 import requests
 
 from app import app
-from app.config import config
+from app.config import config, allowed_emails
 
 from . import emails
 from app.keys import login_key, session_key, user_key
@@ -15,6 +15,9 @@ from app.keys import login_key, session_key, user_key
 def login_form():
     email = flask.request.form.get("email")
     #app.logger.info(email)
+
+    if email not in config.allowed_emails:
+        return flask.redirect(flask.url_for('login_problem'))
 
     #app.logger.info(app.redis)
 

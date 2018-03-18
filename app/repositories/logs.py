@@ -26,6 +26,11 @@ VALUES (
 )
 """
 
+list_user_logs = """
+SELECT *
+FROM game_logs
+"""
+
 def log(user_id, log_data):
     app.logger.info(log_data)
     log_id = uuid4()
@@ -48,3 +53,15 @@ def log(user_id, log_data):
     connection.conn.commit()
 
     return log_id
+
+def list(user_id):
+
+    cursor = connection.conn.cursor()
+
+    cursor.execute(list_user_logs)
+
+    logs = cursor.fetchall()
+
+    cursor.close()
+
+    return logs

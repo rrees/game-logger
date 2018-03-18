@@ -1,3 +1,6 @@
+import os
+
+allowed_emails = os.environ.get("ALLOWED_EMAILS", '').split(',')
 
 config = {
     "login": {

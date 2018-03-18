@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+
+{% block title %}All logs{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Logs</h1>
+
+    <ul>
+        {% for log in logs %}
+        <li>{{logs}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
