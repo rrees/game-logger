@@ -18,4 +18,9 @@ def current_user_email():
     return emails.pop()
 
 def current_user_id():
-    return hashlib.sha256(current_user_email().encode('utf-8')).hexdigest()
+    email = current_user_email()
+
+    if email:
+        return hashlib.sha256(email.encode('utf-8')).hexdigest()
+    
+    return None
