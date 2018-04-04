@@ -8,7 +8,13 @@
 
     <ul>
         {% for log in logs %}
-        <li>{{logs}}</li>
+        <li><a href="/log/{{log.id}}">{{log.name}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for log in logs %}
+        <li>{{log}}</li>
         {% endfor %}
     </ul>
 </div>

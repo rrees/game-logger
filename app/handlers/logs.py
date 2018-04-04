@@ -19,3 +19,13 @@ def list():
     all_logs = logs.list(user_id)
 
     return flask.render_template('list.html', logs=all_logs)
+
+def show_log(log_id):
+    user_id = users.current_user_id()
+
+    if not user_id:
+        return flask.redirect(flask.url_for('index'))
+
+    log = logs.read_log(user_id, log_id)
+
+    return flask.render_template('log.html', log=log)

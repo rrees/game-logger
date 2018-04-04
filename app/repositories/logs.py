@@ -6,6 +6,7 @@ import iso8601
 from app import app
 
 from . import connection
+from app import models
 
 log_insert = """
 INSERT INTO game_logs (
@@ -27,7 +28,12 @@ VALUES (
 """
 
 list_user_logs = """
-SELECT *
+SELECT
+    log_id,
+    game_name,
+    played_on,
+    tags,
+    notes
 FROM game_logs
 """
 
@@ -54,6 +60,15 @@ def log(user_id, log_data):
 
     return log_id
 
+def map_result(result):
+    return models.GameLog(
+        id = result[0],
+        name = result[1],
+        log_date = result[2],
+        tags = result[3],
+        notes = result[4],
+    )
+
 def list(user_id):
 
     cursor = connection.conn.cursor()
@@ -64,4 +79,27 @@ def list(user_id):
 
     cursor.close()
 
-    return logs
+    return [map_result(l) for l in logs]
+
+read_user_log = """
+SELECT
+    log_id,
+    game_name,
+    played_on,
+    tags,
+    notes
+FROM game_logs
+WHERE log_id = %(log_id)s
+"""
+
+def read_log(user_id, log_id):
+    cursor = connection.conn.cursor()
+    cursor.execute(read_user_log,
+        {'log_id': log_id})
+    log = cursor.fetchone()
+    cursor.close()
+    
+    if not log:
+        return None
+    
+    return map_result(log)

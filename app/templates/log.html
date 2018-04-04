@@ -1,0 +1,17 @@
+{% extends 'default.html' %}
+
+{% block title %}All logs{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Log</h1>
+
+    {% if log %}
+    <pre>{{log}}</pre>
+    {% endif %}
+
+    {% if not log %}
+    <p>That log id was not recognised</p>
+    {% endif %}
+</div>
+{% endblock %}

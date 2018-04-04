@@ -28,6 +28,7 @@ routes = [
     ('/home', 'home', handlers.pages.home_page, ['GET']),
     ('/log', 'log_form', handlers.logs.log_form, ['POST']),
     ('/logs', 'logs_listing', handlers.logs.list, ['GET']),
+    ('/log/<log_id>', 'show_log', handlers.logs.show_log, ['GET']),
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:
