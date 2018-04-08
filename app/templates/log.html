@@ -8,6 +8,24 @@
 
     {% if log %}
     <pre>{{log}}</pre>
+
+
+    <h2>{{log.name}}</h2>
+
+    {% if log.notes %}
+    <div class="log-entry--notes">
+        <pre>{{log.notes}}</pre>
+    </div>
+    {% endif %}
+
+    <form class="log-entry--delete" method="POST" action="/log/forms/delete">
+        <input type="hidden" value="{{log.id}}">
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+    </form>
+
     {% endif %}
 
     {% if not log %}
