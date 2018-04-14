@@ -103,3 +103,19 @@ def read_log(user_id, log_id):
         return None
     
     return map_result(log)
+
+delete_user_log = '''
+DELETE FROM game_logs
+WHERE log_id = %(log_id)s
+AND user_id = %(user_id)s
+'''
+
+def delete_log(user_id, log_id):
+    statement_parameters = {
+        'user_id': user_id,
+        'log_id': log_id,
+    }
+    cursor = connection.conn.cursor()
+    cursor.execute(delete_user_log, statement_parameters)
+    cursor.close()
+    return
