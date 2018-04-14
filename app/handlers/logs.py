@@ -32,5 +32,5 @@ def show_log(log_id):
 
 def delete_log_form(log_id):
     user_id = users.current_user_id()
-    logs.delete_log(user_id, log_id)
+    logs.delete_log(user_id, log_id, unconditional_delete=True)
     return flask.redirect(flask.url_for('logs_listing'))

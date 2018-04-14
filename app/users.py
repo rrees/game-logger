@@ -13,8 +13,6 @@ def current_user_email():
     app.logger.info(session_id)
     emails = app.redis.hmget(keys.session_key(session_id), 'email')
 
-    app.logger.info(emails)
-
     return emails.pop()
 
 def current_user_id():

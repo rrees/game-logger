@@ -6,6 +6,7 @@ import iso8601
 from app import app
 
 from . import connection
+from . import statements
 from app import models
 
 log_insert = """
@@ -104,18 +105,15 @@ def read_log(user_id, log_id):
     
     return map_result(log)
 
-delete_user_log = '''
-DELETE FROM game_logs
-WHERE log_id = %(log_id)s
-AND user_id = %(user_id)s
-'''
 
-def delete_log(user_id, log_id):
+def delete_log(user_id, log_id, unconditional_delete=False):
     statement_parameters = {
         'user_id': user_id,
         'log_id': log_id,
     }
+    statement = statements.delete_log if unconditional_delete else statements.delete_user_log
     cursor = connection.conn.cursor()
-    cursor.execute(delete_user_log, statement_parameters)
+    result = cursor.execute(statement, statement_parameters)
     cursor.close()
+    connection.conn.commit()
     return
