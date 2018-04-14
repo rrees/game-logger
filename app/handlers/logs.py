@@ -29,3 +29,7 @@ def show_log(log_id):
     log = logs.read_log(user_id, log_id)
 
     return flask.render_template('log.html', log=log)
+
+def delete_log_form(log_id):
+
+    return flask.redirect(flask.url_for('logs_listing'))

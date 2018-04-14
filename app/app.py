@@ -29,6 +29,7 @@ routes = [
     ('/log', 'log_form', handlers.logs.log_form, ['POST']),
     ('/logs', 'logs_listing', handlers.logs.list, ['GET']),
     ('/log/<log_id>', 'show_log', handlers.logs.show_log, ['GET']),
+    ('/log/<log_id>/forms/delete', 'delete_log_form', handlers.logs.delete_log_form, ['POST'])
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:

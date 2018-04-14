@@ -18,8 +18,7 @@
     </div>
     {% endif %}
 
-    <form class="log-entry--delete" method="POST" action="/log/forms/delete">
-        <input type="hidden" value="{{log.id}}">
+    <form class="log-entry--delete" method="POST" action="/log/{{log.id}}/forms/delete">
         <div class="form-group">
             <button type="submit" class="btn btn-danger">Delete</button>
         </div>
