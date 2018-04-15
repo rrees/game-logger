@@ -19,7 +19,7 @@
     </div>
     {% endif %}
 
-    <div class="log-entry--edit-form">
+    <div class="log-entry--edit-form" data-bind="visible: showEdit">
         <h2>Edit {{log.name}}</h2>
         <form method="POST" action="/log/{{log.id}}/forms/edit">
             <div class="form-group">
@@ -48,6 +48,8 @@
         </form>
     </div>
 
+    <p><button class="btn btn-primary" data-bind="click: toggleEditing">Edit</button></p>
+
     <form class="log-entry--delete" method="POST" action="/log/{{log.id}}/forms/delete">
         <div class="form-group">
             <button type="submit" class="btn btn-danger">Delete</button>
@@ -61,4 +63,17 @@
     <p>That log id was not recognised</p>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    const LogViewModel = function() {
+        this.showEdit = ko.observable(false),
+        this.toggleEditing = function toggleEditing() {
+            this.showEdit(!this.showEdit());
+        }
+    }
+
+    ko.applyBindings(new LogViewModel());
+</script>
 {% endblock %}
