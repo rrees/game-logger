@@ -4,19 +4,49 @@
 
 {% block content %}
 <div class="container-fluid">
-    <h1>Log</h1>
-
     {% if log %}
-    <pre>{{log}}</pre>
-
 
     <h2>{{log.name}}</h2>
 
+    <p>Played: {{log.log_date}}</p>
+
+    <p>Tags: {{log.tags}}</p>
+
     {% if log.notes %}
     <div class="log-entry--notes">
+        <h3>Notes</h3>
         <pre>{{log.notes}}</pre>
     </div>
     {% endif %}
+
+    <div class="log-entry--edit-form">
+        <h2>Edit {{log.name}}</h2>
+        <form method="POST" action="/log/{{log.id}}/forms/edit">
+            <div class="form-group">
+                <label for="game-name">Game name</label>
+                <input type="text" name="game_name" id="game-name" class="form-control" required value="{{log.name}}"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="date-played">Date</label>
+                <input type="date" name="date_played" id="date-played" class="form-control" required value="{{log.log_date}}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input id="tags" type="text" class="form-control" name="tags" value="{{log.tags}}">
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes" class="form-control" name="notes">{{log.notes}}</textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
 
     <form class="log-entry--delete" method="POST" action="/log/{{log.id}}/forms/delete">
         <div class="form-group">

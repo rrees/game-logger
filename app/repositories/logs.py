@@ -3,46 +3,21 @@ from uuid import uuid4
 
 import iso8601
 
+from rrees_tag_manager import tags
+
 from app import app
 
 from . import connection
 from . import statements
 from app import models
 
-log_insert = """
-INSERT INTO game_logs (
-    log_id,
-    user_id,
-    game_name,
-    played_on,
-    tags,
-    notes
-)
-VALUES (
-    %(log_id)s,
-    %(user_id)s,
-    %(game_name)s,
-    %(played_on)s,
-    %(tags)s,
-    %(notes)s
-)
-"""
-
-list_user_logs = """
-SELECT
-    log_id,
-    game_name,
-    played_on,
-    tags,
-    notes
-FROM game_logs
-"""
-
 def log(user_id, log_data):
     app.logger.info(log_data)
     log_id = uuid4()
     game_name = log_data['game_name']
     played_date = iso8601.parse_date(log_data['date_played'])
+    log_tags = tags.process(log_data.get('tags', ''))
+    notes = log_data.get('notes', None)
 
     cur = connection.conn.cursor()
     parameters = {
@@ -50,10 +25,10 @@ def log(user_id, log_data):
         "user_id": user_id,
         "game_name": game_name,
         "played_on": played_date,
-        "tags": [],
-        "notes": None,
+        "tags": log_tags,
+        "notes": notes,
     }
-    cur.execute(log_insert, parameters)
+    cur.execute(statements.log_insert, parameters)
 
     cur.close()
 
@@ -66,15 +41,15 @@ def map_result(result):
         id = result[0],
         name = result[1],
         log_date = result[2],
-        tags = result[3],
-        notes = result[4],
+        tags =  tags.as_string(result[3]),
+        notes = result[4] if result[4] != None else '',
     )
 
 def list(user_id):
 
     cursor = connection.conn.cursor()
 
-    cursor.execute(list_user_logs)
+    cursor.execute(statements.list_user_logs)
 
     logs = cursor.fetchall()
 
@@ -116,4 +91,17 @@ def delete_log(user_id, log_id, unconditional_delete=False):
     result = cursor.execute(statement, statement_parameters)
     cursor.close()
     connection.conn.commit()
+    return
+
+def update_log(user_id, log_id, data):
+    statement_parameters = {
+        'log_id': log_id,
+        'played_on': data.get('date_played'),
+        'tags': tags.process(data.get('tags', '')),
+        'notes': data.get('notes', ''),
+    }
+    statement = statements.update_log
+    cursor = connection.conn.cursor()
+    result = cursor.execute(statement, statement_parameters)
+    cursor.close()
     return
