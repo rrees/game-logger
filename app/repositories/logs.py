@@ -104,4 +104,7 @@ def update_log(user_id, log_id, data):
     cursor = connection.conn.cursor()
     result = cursor.execute(statement, statement_parameters)
     cursor.close()
+
+    connection.conn.commit()
+
     return
