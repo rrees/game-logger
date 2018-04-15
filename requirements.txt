@@ -1,3 +1,4 @@
+--index-url=https://packagecloud.io/rrees/libs/pypi/simple
 Flask
 gunicorn
 psycopg2
