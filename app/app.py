@@ -30,7 +30,8 @@ routes = [
     ('/logs', 'logs_listing', handlers.logs.list, ['GET']),
     ('/log/<log_id>', 'show_log', handlers.logs.show_log, ['GET']),
     ('/log/<log_id>/forms/delete', 'delete_log_form', handlers.logs.delete_log_form, ['POST']),
-    ('/log/<log_id>/forms/edit', 'edit_log_form', handlers.logs.edit_log_form, ['POST'])
+    ('/log/<log_id>/forms/edit', 'edit_log_form', handlers.logs.edit_log_form, ['POST']),
+    ('/log/add', 'logs_add', handlers.pages.add_log, ['GET']),
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:

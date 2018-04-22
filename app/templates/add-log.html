@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+
+{% block title %}Add a log{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Log a new entry</h1>
+</div>
+
+<div class="container-fluid">
+    <form method="POST" action="/log">
+        {% include 'forms/log.html' %}
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Log</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
