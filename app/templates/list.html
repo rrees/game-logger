@@ -6,9 +6,16 @@
 <div class="container-fluid">
     <h1>Logs</h1>
 
-    <ul>
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Date played</th>
+        </thead>
         {% for log in logs %}
-        <li><a href="/log/{{log.id}}">{{log.name}}</a></li>
+        <tr>
+            <td><a href="/log/{{log.id}}">{{log.name}}</a></td>
+            <td>{{log.date_played}}</td>
+        </tr>
         {% endfor %}
     </ul>
 

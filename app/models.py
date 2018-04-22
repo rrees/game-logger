@@ -4,7 +4,7 @@ GameLog = namedtuple('GameLog',
     [
         'id',
         'name',
-        'log_date',
+        'date_played',
         'tags',
         'notes',
     ])
