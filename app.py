@@ -1,6 +1,7 @@
 import os
 import logging
 import datetime
+import json
 
 import webapp2
 import jinja2
@@ -107,6 +108,31 @@ class DeleteLogPage(webapp2.RequestHandler):
 		games.delete_log(log_id)
 		return webapp2.redirect('/logs')
 
+class Export(webapp2.RequestHandler):
+	def get(self):
+		self.response.headers['Content-Type'] = 'application/json'
+
+		user = users.get_current_user()
+
+		all_games = games.all_played(user)
+
+		def to_dict(game_log):
+			return {
+				"name": game_log.game_name,
+				"date_played": game_log.date_played.isoformat(),
+				"tags": [tag.strip() for tag in game_log.tags],
+				"notes": game_log.notes if game_log.notes else "",
+			}
+
+		payload = {
+			"message": "Game log exports",
+			"games": [to_dict(game) for game in all_games],
+		}
+
+		serialised_json = json.dumps(payload)
+
+		self.response.out.write(serialised_json)
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/home', handler=HomePage),
@@ -114,4 +140,5 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/logs', handler=LogsPage),
 	webapp2.Route(r'/log/<log_id>', handler=LogPage),
 	webapp2.Route(r'/log/<log_id>/delete', handler=DeleteLogPage),
+	webapp2.Route(r'/export', handler=Export),
 	], debug=True)
