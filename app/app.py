@@ -33,6 +33,7 @@ routes = [
     ('/log/<log_id>/forms/edit', 'edit_log_form', handlers.logs.edit_log_form, ['POST']),
     ('/log/add', 'logs_add', handlers.pages.add_log, ['GET']),
     ('/import', 'import', handlers.transfers.import_logs, ['GET']),
+    ('/import/form', 'import_form', handlers.transfers.import_logs_form, ['POST']),
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:
