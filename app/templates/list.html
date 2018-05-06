@@ -10,11 +10,16 @@
         <thead>
             <th>Name</th>
             <th>Date played</th>
+            <th>Details</th>
         </thead>
         {% for log in logs %}
         <tr>
             <td><a href="/log/{{log.id}}">{{log.name}}</a></td>
             <td>{{log.date_played}}</td>
+            <td>
+                <p>Tags: {% for tag in log.tags %}{{tag}}{% endfor %}</p>
+                <p>Note: {{log.notes}}</p>
+            </td>
         </tr>
         {% endfor %}
     </ul>
