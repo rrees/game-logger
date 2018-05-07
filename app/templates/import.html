@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
     <h1>Import logs</h1>
-    <form>
+    <form method="POST" action="{{url_for('import_form')}}">
         <div class="form-group">
             <label for="import-data">JSON data to import</label>
             <textarea name="import_data" id="import-data" class="form-control"></textarea>
