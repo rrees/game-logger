@@ -18,7 +18,7 @@
             <td>{{log.date_played}}</td>
             <td>
                 {% if log.tags %}
-                <p>Tags: {% for tag in log.tags %}{{tag}}{% endfor %}</p>
+                <p>Tags: {% for tag in log.tags %}<a href="/logs/tag/{{tag}}">{{tag}}</a> {% endfor %}</p>
                 {% endif %}
                 {% if log.notes %}
                 <p>Notes: {{log.notes}}</p>

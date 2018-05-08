@@ -41,7 +41,7 @@ def map_result(result):
         id = result[0],
         name = result[1],
         date_played = result[2],
-        tags =  tags.as_string(result[3]),
+        tags =  result[3],
         notes = result[4] if result[4] != None else '',
     )
 
