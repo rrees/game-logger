@@ -8,10 +8,13 @@ url = parse.urlparse(os.environ["DATABASE_URL"])
 
 psycopg2.extras.register_uuid()
 
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
+def create_connection():
+    return psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
+
+conn = create_connection()

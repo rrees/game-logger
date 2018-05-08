@@ -17,8 +17,12 @@
             <td><a href="/log/{{log.id}}">{{log.name}}</a></td>
             <td>{{log.date_played}}</td>
             <td>
+                {% if log.tags %}
                 <p>Tags: {% for tag in log.tags %}{{tag}}{% endfor %}</p>
-                <p>Note: {{log.notes}}</p>
+                {% endif %}
+                {% if log.notes %}
+                <p>Notes: {{log.notes}}</p>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

@@ -6,6 +6,7 @@ import flask_sslify
 
 from . import handlers
 from . import redis_utils
+from . import context_processors
 
 from app import auth
 
@@ -22,6 +23,8 @@ if not ENV == "DEV":
     sslify = flask_sslify.SSLify(app)
 
 logger = app.logger
+
+app.context_processor(context_processors.years)
 
 routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),
