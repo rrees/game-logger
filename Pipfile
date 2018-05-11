@@ -3,6 +3,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://packagecloud.io/rrees/libs/pypi/simple"
+verify_ssl = true
+name = "rrees-pypi"
+
 [packages]
 gunicorn = "*"
 "psycopg2" = "*"
