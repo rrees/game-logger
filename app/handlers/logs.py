@@ -46,7 +46,7 @@ def list_by_tag(tag_name):
     if not user_id:
         return flask.redirect(flask.url_for('index'))
 
-    all_logs = logs.list(user_id)
+    all_logs = logs.list_by_tag(user_id, tag_name)
 
     return flask.render_template('list.html', logs=all_logs)
 

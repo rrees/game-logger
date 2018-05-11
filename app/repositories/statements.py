@@ -58,3 +58,15 @@ FROM game_logs
 WHERE EXTRACT(year from "played_on") = %(year)s
 ORDER BY played_on DESC
 """
+
+list_user_logs_by_tag = """
+SELECT
+    log_id,
+    game_name,
+    played_on,
+    tags,
+    notes
+FROM game_logs
+WHERE %(tag)s = ANY (tags)
+ORDER BY played_on DESC
+"""

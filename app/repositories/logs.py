@@ -127,3 +127,21 @@ def list_by_year(user_id, year):
     cursor.close()
 
     return [map_result(l) for l in logs]
+
+def list_by_tag(user_id, tag):
+
+    conn = connection.create_connection()
+
+    cursor = conn.cursor()
+
+    statement_parameters = {
+        "tag": tag,
+    }
+
+    cursor.execute(statements.list_user_logs_by_tag, statement_parameters)
+
+    logs = cursor.fetchall()
+
+    cursor.close()
+
+    return [map_result(l) for l in logs]
