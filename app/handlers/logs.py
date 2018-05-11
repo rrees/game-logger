@@ -39,3 +39,23 @@ def edit_log_form(log_id):
     user_id = users.current_user_id()
     logs.update_log(user_id, log_id, flask.request.form)
     return flask.redirect(flask.url_for('show_log', log_id=log_id))
+
+def list_by_tag(tag_name):
+    user_id = users.current_user_id()
+
+    if not user_id:
+        return flask.redirect(flask.url_for('index'))
+
+    all_logs = logs.list(user_id)
+
+    return flask.render_template('list.html', logs=all_logs)
+
+def list_by_year(year):
+    user_id = users.current_user_id()
+
+    if not user_id:
+        return flask.redirect(flask.url_for('index'))
+
+    all_logs = logs.list_by_year(user_id, year)
+
+    return flask.render_template('list.html', logs=all_logs)

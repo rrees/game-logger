@@ -108,3 +108,22 @@ def update_log(user_id, log_id, data):
     connection.conn.commit()
 
     return
+
+
+def list_by_year(user_id, year):
+
+    conn = connection.create_connection()
+
+    cursor = conn.cursor()
+
+    statement_parameters = {
+        "year": year
+    }
+
+    cursor.execute(statements.list_user_logs_by_year, statement_parameters)
+
+    logs = cursor.fetchall()
+
+    cursor.close()
+
+    return [map_result(l) for l in logs]
