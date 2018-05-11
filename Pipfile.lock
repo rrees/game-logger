@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f610f7c47698970ca4cf1ee9dabd60b52087b20b57aef1891707e9b9190ccd6a"
+            "sha256": "0ddf2f8b372ae4b61a3631699565eaf1835f4eac2f847a615a471a3852c7e66a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -11,6 +11,11 @@
             {
                 "name": "pypi",
                 "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            },
+            {
+                "name": "rrees-pypi",
+                "url": "https://packagecloud.io/rrees/libs/pypi/simple",
                 "verify_ssl": true
             }
         ]
