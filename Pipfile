@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = "*"
+"psycopg2" = "*"
+requests = "*"
+redis = "*"
+"iso8601" = "*"
+rrees-tag-manager = "*"
+Flask = "*"
+Flask-SSLify = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
