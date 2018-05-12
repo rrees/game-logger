@@ -25,3 +25,9 @@ def import_logs_form():
         logs.log(current_user_id, log_data)
 
     return flask.redirect(flask.url_for('logs_listing'))
+
+def export_logs():
+    log_data = {
+        "games": [],
+    }
+    return flask.jsonify(log_data)
