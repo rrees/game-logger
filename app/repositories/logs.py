@@ -1,5 +1,6 @@
 import datetime
 from uuid import uuid4
+import logging
 
 import iso8601
 
@@ -94,10 +95,13 @@ def delete_log(user_id, log_id, unconditional_delete=False):
     return
 
 def update_log(user_id, log_id, data):
+    tag_list = tags.process(data.get('tags', ''))
+    logging.info(tag_list)
+
     statement_parameters = {
         'log_id': log_id,
         'played_on': data.get('date_played'),
-        'tags': tags.process(data.get('tags', '')),
+        'tags': tag_list,
         'notes': data.get('notes', ''),
     }
     statement = statements.update_log
