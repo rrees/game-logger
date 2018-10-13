@@ -13,6 +13,7 @@ from . import emails
 from app.keys import login_key, session_key, user_key
 
 def login_form():
+    app.logger.info('In the login form processing')
     email = flask.request.form.get("email")
     #app.logger.info(email)
 
@@ -32,6 +33,7 @@ def login_form():
     app.logger.info(app.redis.hgetall(login_key(login_token)))
 
     # Send email
+    app.logger.info('About to send email')
     send_result = emails.send_login(email, login_token)
 
     if not send_result:

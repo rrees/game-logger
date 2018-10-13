@@ -22,6 +22,7 @@ app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
 if not ENV == "DEV":
     sslify = flask_sslify.SSLify(app)
 
+
 logger = app.logger
 
 app.context_processor(context_processors.years)

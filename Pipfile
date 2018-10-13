@@ -10,13 +10,13 @@ name = "rrees-pypi"
 
 [packages]
 gunicorn = "*"
-"psycopg2" = "*"
 requests = "*"
 redis = "*"
 "iso8601" = "*"
 rrees-tag-manager = "*"
 Flask = "*"
 Flask-SSLify = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 

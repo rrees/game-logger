@@ -9,6 +9,7 @@ from . import config
 APP_NAME = config.config['application_name']
 
 def send_login(email, login_token):
+    app.logger.info('Sending login email')
 
     mailgun_api_key = os.environ.get('MAILGUN_API_KEY')
     mailgun_domain = os.environ.get('MAILGUN_DOMAIN')
