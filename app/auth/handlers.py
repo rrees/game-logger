@@ -15,7 +15,7 @@ from app.keys import login_key, session_key, user_key
 def login_form():
     app.logger.info('In the login form processing')
     email = flask.request.form.get("email")
-    #app.logger.info(email)
+    app.logger.info(email)
 
     if email not in config.get('allowed_emails', []):
         return flask.redirect(flask.url_for('login_problem'))
