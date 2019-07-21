@@ -25,6 +25,9 @@ if not ENV == "DEV":
 
 logger = app.logger
 
+# Uncomment to enable auth debugging info
+#app.logger.setLevel(logging.INFO)
+
 app.context_processor(context_processors.years)
 
 routes = [
