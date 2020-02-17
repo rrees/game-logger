@@ -1,3 +1,5 @@
+import datetime
+
 import flask
 
 from app import app
@@ -13,10 +15,11 @@ def home_page():
 	if not 'session_id' in flask.session:
 		return flask.redirect(flask.url_for('index'))
 
-	return flask.render_template('home.html')
+	return flask.render_template('home.html',
+		today=datetime.date.today().isoformat())
 
 def add_log():
 	if not 'session_id' in flask.session:
 		return flask.redirect(flask.url_for('index'))
 
-	return flask.render_template('add-log.html')
+	return flask.render_template('add-log.html', today=datetime.date.today().isoformat())
