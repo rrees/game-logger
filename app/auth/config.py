@@ -6,7 +6,7 @@ config = {
             "url_prefix": "http://localhost:4545"
         },
         "PROD": {
-            "url_prefix": "https://rrees-game-log.herokuapp.com"
+            "url_prefix": "https://rrees-game-logger.herokuapp.com"
         }
     }
 }
