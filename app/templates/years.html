@@ -1,0 +1,17 @@
+{% extends 'default.html' %}
+
+{% block title %}All logs{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+<h1>Years</h1>
+
+<ul class="years-list">
+	{% for year in years %}
+	<li><a href="{{url_for('logs_by_year', year=year)}}">{{year}}</a></li>
+	{% endfor %}
+</ul>
+
+</div>
+{% endblock %}

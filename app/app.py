@@ -26,32 +26,44 @@ if not ENV == "DEV":
 logger = app.logger
 
 # Uncomment to enable auth debugging info
-#app.logger.setLevel(logging.INFO)
+# app.logger.setLevel(logging.INFO)
 
 app.context_processor(context_processors.years)
 
 routes = [
-	('/', 'index', handlers.pages.front_page, ['GET']),
-    ('/home', 'home', handlers.pages.home_page, ['GET']),
-    ('/log', 'log_form', handlers.logs.log_form, ['POST']),
-    ('/logs', 'logs_listing', handlers.logs.list, ['GET']),
-    ('/logs/tag/<tag_name>', 'logs_by_tag', handlers.logs.list_by_tag, ['GET']),
-    ('/logs/year/<year>', 'logs_by_year', handlers.logs.list_by_year, ['GET']),
-    ('/log/<log_id>', 'show_log', handlers.logs.show_log, ['GET']),
-    ('/log/<log_id>/edit', 'edit_log', handlers.logs.edit_log, ['GET']),
-    ('/log/<log_id>/forms/delete', 'delete_log_form', handlers.logs.delete_log_form, ['POST']),
-    ('/log/<log_id>/forms/edit', 'edit_log_form', handlers.logs.edit_log_form, ['POST']),
-    ('/log/add', 'logs_add', handlers.pages.add_log, ['GET']),
-    ('/import', 'import', handlers.transfers.import_logs, ['GET']),
-    ('/import/form', 'import_form', handlers.transfers.import_logs_form, ['POST']),
-    ('/export', 'export', handlers.transfers.export_logs, ['GET']),
+    ("/", "index", handlers.pages.front_page, ["GET"]),
+    ("/home", "home", handlers.pages.home_page, ["GET"]),
+    ("/log", "log_form", handlers.logs.log_form, ["POST"]),
+    ("/logs", "logs_listing", handlers.logs.list, ["GET"]),
+    ("/logs/tag/<tag_name>", "logs_by_tag", handlers.logs.list_by_tag, ["GET"]),
+    ("/logs/year/<year>", "logs_by_year", handlers.logs.list_by_year, ["GET"]),
+    ("/log/<log_id>", "show_log", handlers.logs.show_log, ["GET"]),
+    ("/log/<log_id>/edit", "edit_log", handlers.logs.edit_log, ["GET"]),
+    (
+        "/log/<log_id>/forms/delete",
+        "delete_log_form",
+        handlers.logs.delete_log_form,
+        ["POST"],
+    ),
+    (
+        "/log/<log_id>/forms/edit",
+        "edit_log_form",
+        handlers.logs.edit_log_form,
+        ["POST"],
+    ),
+    ("/log/add", "logs_add", handlers.pages.add_log, ["GET"]),
+    ("/import", "import", handlers.transfers.import_logs, ["GET"]),
+    ("/import/form", "import_form", handlers.transfers.import_logs_form, ["POST"]),
+    ("/export", "export", handlers.transfers.export_logs, ["GET"]),
+    ("/years", "years", handlers.pages.years, ["GET"]),
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:
-	app.add_url_rule(path, endpoint, handler, methods=methods)
+    app.add_url_rule(path, endpoint, handler, methods=methods)
+
 
 @app.errorhandler(500)
 def server_error(e):
     # Log the error and stacktrace.
-    logging.exception('An error occurred during a request.')
-    return 'An internal error occurred.', 500
+    logging.exception("An error occurred during a request.")
+    return "An internal error occurred.", 500

@@ -25,6 +25,7 @@
                     Years
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbar-years-menu">
+                    <a href="{{url_for('years')}}">Years</a>
                     {% for year in years %}
                     <a class="dropdown-item" href="/logs/year/{{year}}">{{year}}</a>
                     {% endfor %}
