@@ -33,4 +33,9 @@ def years():
     if not "session_id" in flask.session:
         return flask.redirect(flask.url_for("index"))
 
-    return flask.render_template("years.html")
+    first_year = 2016
+    current_year = 2022
+
+    years = [str(y) for y in range(current_year, first_year - 1, -1)]
+
+    return flask.render_template("years.html", years=years)

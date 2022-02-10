@@ -28,7 +28,8 @@ logger = app.logger
 # Uncomment to enable auth debugging info
 # app.logger.setLevel(logging.INFO)
 
-app.context_processor(context_processors.years)
+# Add template context processors here
+# app.context_processor(context_processors.years)
 
 routes = [
     ("/", "index", handlers.pages.front_page, ["GET"]),
