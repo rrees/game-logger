@@ -20,17 +20,10 @@
                 <a href="/log/add" class="nav-link">Add log</a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbar-years-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Years
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbar-years-menu">
-                    <a href="{{url_for('years')}}">Years</a>
-                    {% for year in years %}
-                    <a class="dropdown-item" href="/logs/year/{{year}}">{{year}}</a>
-                    {% endfor %}
-                </div>
+            <li>
+                <a href="{{url_for('years')}}" class="nav-link">Years</a>
             </li>
+
         </ul>
     </div>
 
