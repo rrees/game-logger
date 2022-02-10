@@ -1,11 +1,2 @@
-
 def years():
-    return {
-        "years": [
-        	"2020",
-        	"2019",
-            "2018",
-            "2017",
-            "2016",
-        ]
-    }
+    return {"years": [str(y) for y in range(2022, 2016 - 1, -1)]}
