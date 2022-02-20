@@ -34,7 +34,7 @@ def years():
         return flask.redirect(flask.url_for("index"))
 
     first_year = 2016
-    current_year = 2022
+    current_year = datetime.date.today().year
 
     years = [str(y) for y in range(current_year, first_year - 1, -1)]
 
