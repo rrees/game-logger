@@ -1,6 +1,6 @@
 {% extends 'default.html' %}
 
-{% block title %}All logs{% endblock %}
+{% block title %}{% if log %}{{log.name}} ({{log.date_played}}) {% else %}Unknown logs{% endif %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -10,7 +10,14 @@
 
     <p>Played: {{log.date_played}}</p>
 
-    <p>Tags: {% for tag in log.tags %}{{tag}} {% endfor %}</p>
+    <div class="tag-list flex">
+        <div class="mr-3">Tags:</div>
+        <ul class="tag-list--tags flex list-reset">
+            {% for tag in log.tags %}
+            <li class="mr-3"><a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 
     {% if log.notes %}
     <div class="log-entry--notes">

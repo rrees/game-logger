@@ -18,7 +18,7 @@
             <td>{{log.date_played}}</td>
             <td>
                 {% if log.tags %}
-                <p>Tags: {% for tag in log.tags %}<a href="/logs/tag/{{tag}}">{{tag}}</a> {% endfor %}</p>
+                <p>Tags: {% for tag in log.tags %}<a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a> {% endfor %}</p>
                 {% endif %}
                 {% if log.notes %}
                 <p>Notes: {{log.notes}}</p>
