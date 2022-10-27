@@ -21,21 +21,21 @@ def log(user_id, log_data):
     log_tags = tags.process(log_data.get("tags", ""))
     notes = log_data.get("notes", None)
 
-    conn = connection.create_connection()
-    cur = connection.conn.cursor()
-    parameters = {
-        "log_id": log_id,
-        "user_id": user_id,
-        "game_name": game_name,
-        "played_on": played_date,
-        "tags": log_tags,
-        "notes": notes,
-    }
-    cur.execute(statements.log_insert, parameters)
+    with connection.create_connection() as conn:
+        with conn.cursor() as cur:
+            parameters = {
+                "log_id": log_id,
+                "user_id": user_id,
+                "game_name": game_name,
+                "played_on": played_date,
+                "tags": log_tags,
+                "notes": notes,
+            }
+            cur.execute(statements.log_insert, parameters)
 
-    cur.close()
+            cur.close()
 
-    connection.conn.commit()
+            connection.conn.commit()
 
     return log_id
 
