@@ -32,6 +32,7 @@ def log(user_id, log_data):
             "notes": notes,
         }
         cur.execute(statements.log_insert, parameters)
+        conn.commit()
 
     conn.close()
 
@@ -109,6 +110,7 @@ def update_log(user_id, log_id, data):
 
     statement_parameters = {
         "log_id": log_id,
+        "game_name": data.get("game_name"),
         "played_on": data.get("date_played"),
         "tags": tag_list,
         "notes": data.get("notes", ""),
@@ -120,6 +122,7 @@ def update_log(user_id, log_id, data):
 
     with conn.cursor() as cursor:
         cursor.execute(statement, statement_parameters)
+        conn.commit()
 
     conn.close()
 

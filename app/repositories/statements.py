@@ -19,6 +19,7 @@ VALUES (
 
 update_log = """
 UPDATE game_logs SET 
+    game_name = %(game_name)s,
     played_on = %(played_on)s,
     tags = %(tags)s,
     notes = %(notes)s
@@ -36,16 +37,16 @@ FROM game_logs
 ORDER BY played_on DESC
 """
 
-delete_user_log = '''
+delete_user_log = """
 DELETE FROM game_logs
 WHERE log_id = %(log_id)s
 AND user_id = %(user_id)s
-'''
+"""
 
-delete_log = '''
+delete_log = """
 DELETE FROM game_logs
 WHERE log_id = %(log_id)s
-'''
+"""
 
 list_user_logs_by_year = """
 SELECT
