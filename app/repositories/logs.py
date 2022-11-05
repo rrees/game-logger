@@ -21,21 +21,19 @@ def log(user_id, log_data):
     log_tags = tags.process(log_data.get("tags", ""))
     notes = log_data.get("notes", None)
 
-    with connection.create_connection() as conn:
-        with conn.cursor() as cur:
-            parameters = {
-                "log_id": log_id,
-                "user_id": user_id,
-                "game_name": game_name,
-                "played_on": played_date,
-                "tags": log_tags,
-                "notes": notes,
-            }
-            cur.execute(statements.log_insert, parameters)
+    conn = connection.create_connection()
+    with conn.cursor() as cur:
+        parameters = {
+            "log_id": log_id,
+            "user_id": user_id,
+            "game_name": game_name,
+            "played_on": played_date,
+            "tags": log_tags,
+            "notes": notes,
+        }
+        cur.execute(statements.log_insert, parameters)
 
-            cur.close()
-
-            connection.conn.commit()
+    conn.close()
 
     return log_id
 
@@ -52,13 +50,14 @@ def map_result(result):
 
 def list(user_id):
 
-    cursor = connection.conn.cursor()
+    conn = connection.create_connection()
+    with conn.cursor() as cursor:
 
-    cursor.execute(statements.list_user_logs)
+        cursor.execute(statements.list_user_logs)
 
-    logs = cursor.fetchall()
+        logs = cursor.fetchall()
 
-    cursor.close()
+    conn.close()
 
     return [map_result(l) for l in logs]
 
@@ -76,11 +75,13 @@ WHERE log_id = %(log_id)s
 
 
 def read_log(user_id, log_id):
-    cursor = connection.create_connection().cursor()
-    cursor.execute(read_user_log, {"log_id": log_id})
-    log = cursor.fetchone()
-    cursor.close()
+    conn = connection.create_connection()
 
+    with conn.cursor() as cursor:
+        cursor.execute(read_user_log, {"log_id": log_id})
+        log = cursor.fetchone()
+
+    conn.close()
     if not log:
         return None
 
@@ -112,12 +113,15 @@ def update_log(user_id, log_id, data):
         "tags": tag_list,
         "notes": data.get("notes", ""),
     }
-    statement = statements.update_log
-    cursor = connection.create_connection().cursor()
-    result = cursor.execute(statement, statement_parameters)
-    cursor.close()
 
-    connection.conn.commit()
+    statement = statements.update_log
+
+    conn = connection.create_connection()
+
+    with conn.cursor() as cursor:
+        cursor.execute(statement, statement_parameters)
+
+    conn.close()
 
     return
 
@@ -135,6 +139,8 @@ def list_by_year(user_id, year):
     logs = cursor.fetchall()
 
     cursor.close()
+
+    conn.close()
 
     return [map_result(l) for l in logs]
 
