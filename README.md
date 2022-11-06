@@ -1,3 +1,9 @@
-# Heroku Flask Template
+# Game logger
 
-A template project for getting a Flask application running quickly on Heroku.
+Allows logging of game plays and review of historical information
+
+## Running
+
+### Logging
+
+To enable lower-level logging in the email authentication set the LOGGING_FLAG env variable to "INFO"
