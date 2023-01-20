@@ -11,10 +11,10 @@
     <p>Played: {{log.date_played}}</p>
 
     <div class="tag-list flex">
-        <div class="mr-3">Tags:</div>
+        <div class="me-3">Tags:</div>
         <ul class="tag-list--tags flex list-reset">
             {% for tag in log.tags %}
-            <li class="mr-3"><a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a></li>
+            <li class="me-3"><a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -29,36 +29,34 @@
     <div class="log-entry--edit-form" data-bind="visible: showEdit">
         <h2>Edit {{log.name}}</h2>
         <form method="POST" action="/log/{{log.id}}/forms/edit">
-            <div class="form-group">
-                <label for="game-name">Game name</label>
+            <div class="mb-3">
+                <label for="game-name" class="form-label">Game name</label>
                 <input type="text" name="game_name" id="game-name" class="form-control" required value="{{log.name}}"/>
             </div>
             
-            <div class="form-group">
-                <label for="date-played">Date</label>
+            <div class="mb-3">
+                <label for="date-played" class="form-label">Date</label>
                 <input type="date" name="date_played" id="date-played" class="form-control" required value="{{log.date_played}}"/>
             </div>
 
-            <div class="form-group">
-                <label for="tags">Tags</label>
+            <div class="mb-3">
+                <label for="tags" class="form-label">Tags</label>
                 <input id="tags" type="text" class="form-control" name="tags" value="{{log.tags | join(" ")}}">
             </div>
 
-            <div class="form-group">
-                <label for="notes">Notes</label>
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes</label>
                 <textarea id="notes" class="form-control" name="notes">{{log.notes}}</textarea>
             </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 
     <p><button class="btn btn-primary" data-bind="click: toggleEditing">Edit</button></p>
 
     <form class="log-entry--delete" method="POST" action="/log/{{log.id}}/forms/delete">
-        <div class="form-group">
+        <div class="mb-3">
             <button type="submit" class="btn btn-danger">Delete</button>
         </div>
     </form>

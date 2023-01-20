@@ -1,25 +1,25 @@
 
 
-<div class="form-group">
-    <label for="game-name">Game name</label>
+<div class="mb-3">
+    <label for="game-name" class="form-label">Game name</label>
     <input type="text" name="game_name" id="game-name" class="form-control" required
         {% if log and log.game_name %}value="{{log.game_name}}"{% endif %}/>
 </div>
 
-<div class="form-group">
-    <label for="date-played">Date</label>
+<div class="mb-3">
+    <label for="date-played" class="form-label">Date</label>
     <input type="date" name="date_played" id="date-played" class="form-control" required
         {% if log and log.date_played %}value="{{log.date_played}}"{% endif %}
         {% if not log and today %}value="{{today}}"{% endif %}/>
 </div>
 
-<div class="form-group">
-    <label for="tags">Tags</label>
+<div class="mb-3">
+    <label for="tags" class="form-label">Tags</label>
     <input type="text" name="tags" id="tags" class="form-control"
         {% if log and log.tags %}value="{{log.tags | join(" ")}}"{% endif %}/>
 </div>
 
-<div class="form-group">
-    <label for="notes">Notes</label>
+<div class="mb-3">
+    <label for="notes" class="form-label">Notes</label>
     <textarea id="notes"name="notes" class="form-control" rows="3">{% if log and log.notes %}{{log.notes}}{% endif %}</textarea>
 </div>
