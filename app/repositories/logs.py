@@ -20,6 +20,7 @@ def log(user_id, log_data):
     played_date = iso8601.parse_date(log_data["date_played"])
     log_tags = tags.process(log_data.get("tags", ""))
     notes = log_data.get("notes", None)
+    system = log_data.get("system", None)
 
     conn = connection.create_connection()
     with conn.cursor() as cur:
@@ -30,6 +31,7 @@ def log(user_id, log_data):
             "played_on": played_date,
             "tags": log_tags,
             "notes": notes,
+            "system": system,
         }
         cur.execute(statements.log_insert, parameters)
         conn.commit()
@@ -46,6 +48,7 @@ def map_result(result):
         date_played=result[2],
         tags=result[3],
         notes=result[4] if result[4] != None else "",
+        system=result[5] if result[5] != None else "",
     )
 
 
@@ -69,7 +72,8 @@ SELECT
     game_name,
     played_on,
     tags,
-    notes
+    notes,
+    system
 FROM game_logs
 WHERE log_id = %(log_id)s
 """
@@ -114,6 +118,7 @@ def update_log(user_id, log_id, data):
         "played_on": data.get("date_played"),
         "tags": tag_list,
         "notes": data.get("notes", ""),
+        "system": data.get("system", ""),
     }
 
     statement = statements.update_log
