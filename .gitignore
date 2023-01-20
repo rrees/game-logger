@@ -102,3 +102,6 @@ ENV/
 
 # VS Code
 .vscode
+
+# DBMate
+db/schema.sql
