@@ -12,7 +12,7 @@ from app import auth
 
 ENV = os.environ.get("ENV", "PROD")
 
-redis_url = os.environ.get("REDIS_URL", None)
+redis_url = os.environ["REDIS_URL"]
 
 redis = redis_utils.setup_redis(redis_url) if redis_url else None
 

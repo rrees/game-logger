@@ -15,7 +15,7 @@
         {% for log in logs %}
         <tr>
             <td><a href="/log/{{log.id}}">{{log.name}}</a></td>
-            <td>{{log.date_played}}</td>
+            <td><time datetime="{{log.date_played}}">{{log.date_played}}</time></td>
             <td>
                 {% if log.tags %}
                 <p>Tags: {% for tag in log.tags %}<a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a> {% endfor %}</p>
