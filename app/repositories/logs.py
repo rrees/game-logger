@@ -44,9 +44,9 @@ def log(user_id, log_data):
 def map_result(result):
     return models.GameLog(
         id=result[0],
-        name=result[1],
+        game_name=result[1],
         date_played=result[2],
-        tags=result[3],
+        tags=[t for t in result[3] if t],
         notes=result[4] if result[4] != None else "",
         system=result[5] if result[5] != None else "",
     )

@@ -12,6 +12,7 @@ VALUES (
     %(log_id)s,
     %(user_id)s,
     %(game_name)s,
+    %(system)s,
     %(played_on)s,
     %(tags)s,
     %(notes)s

@@ -9,18 +9,20 @@
     <table class="table">
             <th>Name</th>
             <th>Date played</th>
+            <th class="optional-column">System</th>
             <th class="optional-column">Details</th>
         </thead>
         {% for log in logs %}
-        <tr>
-            <td><a href="/log/{{log.id}}">{{log.name}}</a></td>
+        <tr class="list-log">
+            <td><a href="/log/{{log.id}}">{{log.game_name}}</a></td>
             <td><time datetime="{{log.date_played}}" class="text-nowrap">{{log.date_played}}</time></td>
+            <td class="optional-column">{% if log.system %}{{log.system}}{% endif %}    </td>
             <td class="optional-column">
                 {% if log.tags %}
                 <p>Tags: {% for tag in log.tags %}<a href="{{url_for('logs_by_tag', tag_name=tag)}}">{{tag}}</a> {% endfor %}</p>
                 {% endif %}
                 {% if log.notes %}
-                <p>Notes: {{log.notes}}</p>
+                <p class="list-log--notes">Notes: {{log.notes}}</p>
                 {% endif %}
             </td>
         </tr>

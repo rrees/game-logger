@@ -1,14 +1,18 @@
 {% extends 'default.html' %}
 
-{% block title %}{% if log %}{{log.name}} ({{log.date_played}}) {% else %}Unknown logs{% endif %}{% endblock %}
+{% block title %}{% if log %}{{log.game_name}} ({{log.date_played}}) {% else %}Unknown logs{% endif %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     {% if log %}
 
-    <h2>{{log.name}}</h2>
+    <h2>{{log.game_name}}</h2>
 
     <p>Played: {{log.date_played}}</p>
+
+    {% if log.system %}
+    <p>System: {{log.system}}</p>
+    {% endif %}
 
     <div class="tag-list flex">
         <div class="me-3">Tags:</div>
@@ -26,29 +30,12 @@
     </div>
     {% endif %}
 
-    <div class="log-entry--edit-form" data-bind="visible: showEdit">
-        <h2>Edit {{log.name}}</h2>
+    <div class="log-entry--edit-form mb-3" data-bind="visible: showEdit">
+        <h2>Edit {{log.game_name}}</h2>
         <form method="POST" action="/log/{{log.id}}/forms/edit">
-            <div class="mb-3">
-                <label for="game-name" class="form-label">Game name</label>
-                <input type="text" name="game_name" id="game-name" class="form-control" required value="{{log.name}}"/>
-            </div>
             
-            <div class="mb-3">
-                <label for="date-played" class="form-label">Date</label>
-                <input type="date" name="date_played" id="date-played" class="form-control" required value="{{log.date_played}}"/>
-            </div>
-
-            <div class="mb-3">
-                <label for="tags" class="form-label">Tags</label>
-                <input id="tags" type="text" class="form-control" name="tags" value="{{log.tags | join(" ")}}">
-            </div>
-
-            <div class="mb-3">
-                <label for="notes" class="form-label">Notes</label>
-                <textarea id="notes" class="form-control" name="notes">{{log.notes}}</textarea>
-            </div>
-
+            {% include 'forms/log.html' %}
+            
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

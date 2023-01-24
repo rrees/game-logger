@@ -14,6 +14,14 @@
 </div>
 
 <div class="mb-3">
+    <label for="system" class="form-label">System</label>
+    <input type="text" name="system" id="system" class="form-control"
+        {% if log and log.system %}
+        value="{{log.system}}"
+        {% endif %}/>
+</div>
+
+<div class="mb-3">
     <label for="tags" class="form-label">Tags</label>
     <input type="text" name="tags" id="tags" class="form-control"
         {% if log and log.tags %}value="{{log.tags | join(" ")}}"{% endif %}/>

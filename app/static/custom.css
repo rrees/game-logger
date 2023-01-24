@@ -4,3 +4,7 @@
 		display: none;
 	}
 }
+
+.list-log--notes {
+	max-width: 25rem;
+}
