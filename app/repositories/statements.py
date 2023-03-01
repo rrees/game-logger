@@ -41,6 +41,8 @@ FROM game_logs
 ORDER BY played_on DESC
 """
 
+recent_user_logs = list_user_logs + " LIMIT %(limit)s"
+
 delete_user_log = """
 DELETE FROM game_logs
 WHERE log_id = %(log_id)s

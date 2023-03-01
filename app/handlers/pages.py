@@ -6,8 +6,8 @@ from app import app
 
 
 def front_page():
-    app.logger.info(flask.session.keys())
-    if "session_id" in flask.session:
+    # app.logger.info(flask.session.keys())
+    if "session_id" in flask.session and users.current_user_id():
         return flask.redirect(flask.url_for("home"))
 
     return flask.render_template("index.html")

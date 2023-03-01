@@ -170,3 +170,18 @@ def list_by_tag(user_id, tag):
     cursor.close()
 
     return [map_result(l) for l in logs]
+
+def recent_logs(maximum_logs=100):
+    conn = connection.create_connection()
+    with conn.cursor() as cursor:
+        statement_parameters = {
+            "limit": maximum_logs,
+        }
+
+        cursor.execute(statements.recent_user_logs, statement_parameters)
+
+        logs = cursor.fetchall()
+
+    conn.close()
+
+    return [map_result(l) for l in logs]

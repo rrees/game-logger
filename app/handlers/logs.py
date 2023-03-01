@@ -6,7 +6,7 @@ from app import users
 from ..repositories import logs
 
 def log_form():
-    app.logger.info(flask.request.form)
+    # app.logger.info(flask.request.form)
     logs.log(users.current_user_id(), flask.request.form)
     return flask.redirect(flask.url_for('home'))
 
@@ -67,5 +67,15 @@ def list_by_year(year):
         return flask.redirect(flask.url_for('index'))
 
     all_logs = logs.list_by_year(user_id, year)
+
+    return flask.render_template('list.html', logs=all_logs)
+
+def recent_logs():
+    user_id = users.current_user_id()
+
+    if not user_id:
+        return flask.redirect(flask.url_for('index'))
+
+    all_logs = logs.recent_logs()
 
     return flask.render_template('list.html', logs=all_logs)

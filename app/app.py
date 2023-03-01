@@ -40,6 +40,7 @@ routes = [
     ("/logs", "logs_listing", handlers.logs.list, ["GET"]),
     ("/logs/tag/<tag_name>", "logs_by_tag", handlers.logs.list_by_tag, ["GET"]),
     ("/logs/year/<year>", "logs_by_year", handlers.logs.list_by_year, ["GET"]),
+    ("/logs/recent", "recent_logs", handlers.logs.recent_logs, ["GET"]),
     ("/log/<log_id>", "show_log", handlers.logs.show_log, ["GET"]),
     ("/log/<log_id>/edit", "edit_log", handlers.logs.edit_log, ["GET"]),
     (
@@ -59,6 +60,7 @@ routes = [
     ("/import/form", "import_form", handlers.transfers.import_logs_form, ["POST"]),
     ("/export", "export", handlers.transfers.export_logs, ["GET"]),
     ("/years", "years", handlers.pages.years, ["GET"]),
+    ("/navigation/logs", "navigation_logs", handlers.navigation.logs, ["GET"]),
 ]
 
 for path, endpoint, handler, methods in routes + auth.routes.all:
