@@ -3,6 +3,7 @@ import datetime
 import flask
 
 from app import app
+from app import users
 
 
 def front_page():
