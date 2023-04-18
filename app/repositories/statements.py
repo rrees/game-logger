@@ -19,6 +19,18 @@ VALUES (
 )
 """
 
+read_user_log = """
+SELECT
+    log_id,
+    game_name,
+    played_on,
+    tags,
+    notes,
+    system
+FROM game_logs
+WHERE log_id = %(log_id)s
+"""
+
 update_log = """
 UPDATE game_logs SET 
     game_name = %(game_name)s,

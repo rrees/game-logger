@@ -22,21 +22,19 @@ def log(user_id, log_data):
     notes = log_data.get("notes", None)
     system = log_data.get("system", None)
 
-    conn = connection.create_connection()
-    with conn.cursor() as cur:
-        parameters = {
-            "log_id": log_id,
-            "user_id": user_id,
-            "game_name": game_name,
-            "played_on": played_date,
-            "tags": log_tags,
-            "notes": notes,
-            "system": system,
-        }
-        cur.execute(statements.log_insert, parameters)
-        conn.commit()
-
-    conn.close()
+    with connection.create_connection() as conn:
+        with conn.cursor() as cur:
+            parameters = {
+                "log_id": log_id,
+                "user_id": user_id,
+                "game_name": game_name,
+                "played_on": played_date,
+                "tags": log_tags,
+                "notes": notes,
+                "system": system,
+            }
+            cur.execute(statements.log_insert, parameters)
+            conn.commit()
 
     return log_id
 
@@ -54,39 +52,23 @@ def map_result(result):
 
 def list(user_id):
 
-    conn = connection.create_connection()
-    with conn.cursor() as cursor:
+    with connection.create_connection() as conn:
+        with conn.cursor() as cursor:
 
-        cursor.execute(statements.list_user_logs)
+            cursor.execute(statements.list_user_logs)
 
-        logs = cursor.fetchall()
-
-    conn.close()
+            logs = cursor.fetchall()
 
     return [map_result(l) for l in logs]
 
 
-read_user_log = """
-SELECT
-    log_id,
-    game_name,
-    played_on,
-    tags,
-    notes,
-    system
-FROM game_logs
-WHERE log_id = %(log_id)s
-"""
-
-
 def read_log(user_id, log_id):
-    conn = connection.create_connection()
+    with connection.create_connection() as conn:
 
-    with conn.cursor() as cursor:
-        cursor.execute(read_user_log, {"log_id": log_id})
-        log = cursor.fetchone()
+        with conn.cursor() as cursor:
+            cursor.execute(statements.read_user_log, {"log_id": log_id})
+            log = cursor.fetchone()
 
-    conn.close()
     if not log:
         return None
 
@@ -101,10 +83,11 @@ def delete_log(user_id, log_id, unconditional_delete=False):
     statement = (
         statements.delete_log if unconditional_delete else statements.delete_user_log
     )
-    cursor = connection.conn.cursor()
-    result = cursor.execute(statement, statement_parameters)
-    cursor.close()
-    connection.conn.commit()
+    with connection.connect() as conn:
+        with conn.cursor() as cursor:
+            result = cursor.execute(statement, statement_parameters)
+            conn.commit()
+    
     return
 
 
@@ -123,65 +106,53 @@ def update_log(user_id, log_id, data):
 
     statement = statements.update_log
 
-    conn = connection.create_connection()
-
-    with conn.cursor() as cursor:
-        cursor.execute(statement, statement_parameters)
-        conn.commit()
-
-    conn.close()
+    with connection.create_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(statement, statement_parameters)
+            conn.commit()
 
     return
 
 
 def list_by_year(user_id, year):
 
-    conn = connection.create_connection()
+    with connection.create_connection() as conn:
+        with conn.cursor() as cursor:
 
-    cursor = conn.cursor()
+            statement_parameters = {"year": year}
 
-    statement_parameters = {"year": year}
+            cursor.execute(statements.list_user_logs_by_year, statement_parameters)
 
-    cursor.execute(statements.list_user_logs_by_year, statement_parameters)
-
-    logs = cursor.fetchall()
-
-    cursor.close()
-
-    conn.close()
+            logs = cursor.fetchall()
 
     return [map_result(l) for l in logs]
 
 
 def list_by_tag(user_id, tag):
 
-    conn = connection.create_connection()
+    with connection.create_connection() as conn:
 
-    cursor = conn.cursor()
+        with conn.cursor() as cursor:
 
-    statement_parameters = {
-        "tag": tag,
-    }
+            statement_parameters = {
+                "tag": tag,
+            }
 
-    cursor.execute(statements.list_user_logs_by_tag, statement_parameters)
+            cursor.execute(statements.list_user_logs_by_tag, statement_parameters)
 
-    logs = cursor.fetchall()
-
-    cursor.close()
+            logs = cursor.fetchall()
 
     return [map_result(l) for l in logs]
 
 def recent_logs(maximum_logs=100):
-    conn = connection.create_connection()
-    with conn.cursor() as cursor:
-        statement_parameters = {
-            "limit": maximum_logs,
-        }
+    with connection.create_connection() as conn:
+        with conn.cursor() as cursor:
+            statement_parameters = {
+                "limit": maximum_logs,
+            }
 
-        cursor.execute(statements.recent_user_logs, statement_parameters)
+            cursor.execute(statements.recent_user_logs, statement_parameters)
 
-        logs = cursor.fetchall()
-
-    conn.close()
+            logs = cursor.fetchall()
 
     return [map_result(l) for l in logs]

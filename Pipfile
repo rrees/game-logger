@@ -16,7 +16,7 @@ redis = "*"
 rrees-tag-manager = {version="*", index="rrees-pypi"}
 Flask = "*"
 Flask-SSLify = "*"
-"psycopg2-binary" = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 bpython = "*"
