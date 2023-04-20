@@ -1,4 +1,5 @@
 import datetime
+import functools
 
 import flask
 
@@ -30,13 +31,19 @@ def add_log():
     )
 
 
+@functools.cache
+def create_years_list(current_year: int):
+    first_year = 2016
+
+    return [str(y) for y in range(current_year, first_year - 1, -1)]
+
+
 def years():
     if not "session_id" in flask.session:
         return flask.redirect(flask.url_for("index"))
 
-    first_year = 2016
     current_year = datetime.date.today().year
 
-    years = [str(y) for y in range(current_year, first_year - 1, -1)]
+    years = create_years_list(current_year)
 
     return flask.render_template("years.html", years=years)
