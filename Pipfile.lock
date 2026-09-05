@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7e2046e4711c47876bdf8bef5705a229f0e81b308d7699df6d32d0ade939aaee"
+            "sha256": "17735fea03029d2cfbba7405512fb7b35094c1e256de3865e66221840ffe8ee3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -11,11 +11,6 @@
             {
                 "name": "pypi",
                 "url": "https://pypi.org/simple",
-                "verify_ssl": true
-            },
-            {
-                "name": "rrees-pypi",
-                "url": "https://packagecloud.io/rrees/libs/pypi/simple",
                 "verify_ssl": true
             }
         ]
@@ -465,13 +460,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.10'",
             "version": "==2.34.2"
-        },
-        "rrees-tag-manager": {
-            "hashes": [
-                "sha256:6a229771ba66c39d490a21f778f96de7f2785e590dd71fa90c734211e31778b9"
-            ],
-            "index": "rrees-pypi",
-            "version": "==0.0.3"
         },
         "urllib3": {
             "hashes": [
