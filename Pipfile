@@ -3,17 +3,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[[source]]
-url = "https://packagecloud.io/rrees/libs/pypi/simple"
-verify_ssl = true
-name = "rrees-pypi"
 
 [packages]
 gunicorn = "*"
 requests = "*"
 redis = "*"
 "iso8601" = "*"
-rrees-tag-manager = {version="*", index="rrees-pypi"}
 Flask = "*"
 Flask-SSLify = "*"
 psycopg = {extras = ["binary"], version = "*"}
@@ -22,4 +17,4 @@ psycopg = {extras = ["binary"], version = "*"}
 bpython = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.14"

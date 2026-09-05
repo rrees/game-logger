@@ -2,8 +2,7 @@ import json
 
 import flask
 
-from rrees_tag_manager import tags
-
+from app import tags
 from app import users
 from app.repositories import logs
 

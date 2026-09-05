@@ -4,7 +4,7 @@ import logging
 
 import iso8601
 
-from rrees_tag_manager import tags
+from app import tags
 
 from app import app
 
@@ -83,7 +83,7 @@ def delete_log(user_id, log_id, unconditional_delete=False):
     statement = (
         statements.delete_log if unconditional_delete else statements.delete_user_log
     )
-    with connection.connect() as conn:
+    with connection.create_connection() as conn:
         with conn.cursor() as cursor:
             result = cursor.execute(statement, statement_parameters)
             conn.commit()
